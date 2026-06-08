@@ -10,8 +10,8 @@ Maksimalni kredit ograničen je na 50 EUR.
 Za mjerenje vremena isporuke koristi se brojač taktova.
 
 Odabrana je jednostavna FSM arhitektura radi preglednosti i lakše sinteze, uz nešto veći broj stanja u odnosu na kombinacijsku implementaciju.
-3. Verification Steps
 
+3. Verification Steps
 Testbench pokriva sljedeće:
 normalan unos kovanica i kupnju proizvoda
 prekoračenje maksimalnog kredita
