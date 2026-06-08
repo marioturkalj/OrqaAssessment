@@ -37,7 +37,7 @@ architecture Behavioral of vending_machine_tb is
 begin
 
     -- Instanciranje glavnog modula. 
-    -- Generic map za skraæivanje 5 sekundi na 10 taktova
+    -- Generic map za skracivanje 5 sekundi na 10 taktova
     uut: vending_machine 
     generic map (
         CYCLES_5_SEC => 10 
@@ -64,7 +64,7 @@ begin
 
     stim_proc: process
     begin        
-        -- Kreæe iz IDLE stanja
+        -- Krece iz IDLE stanja
         rst <= '1';
         wait for 20 ns;
         rst <= '0';
@@ -76,13 +76,13 @@ begin
         coins <= "0000"; 
         wait for clk_period * 2;
         
-        -- Proizvod br. 1. Oèekujem da æe oduzeti 1.25 EUR od balansa.
+        -- Proizvod br. 1. Ocekujem da ce oduzeti 1.25 EUR od balansa.
         product <= "00001";
         wait for clk_period;
         product <= "00000";
 
-        -- Èim je proizvod odabran, FSM ulazi u DISPATCH
-        -- Pokušaj ubacivanja kovanice, kupnja proizvoda i povrat novca
+        -- Cim je proizvod odabran, FSM ulazi u DISPATCH
+        -- Pokusaj ubacivanja kovanice, kupnja proizvoda i povrat novca
         wait for clk_period; 
         
         -- Error 0100
