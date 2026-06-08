@@ -1,0 +1,14 @@
+-Question 1: The Theoretical Matchup: Arrays vs. Linked Lists
+
+Elementi kod nizova su spremljeni u memoriji jedan do drugoga. Kada procesor dohvaća element niza, obično ne učita samo taj element nego cijeli blok podataka (obično 64 bajta) u brzu cache memoriju. Zbog toga se sljedeći elementi koje petlja treba često već nalaze u cacheu pa ih procesor može vrlo brzo dohvatit.
+Kod vezanih listi čvorovi liste nisu spremljeni jedan iza drugoga u memoriji, nego mogu biti raspoređeni na različitim lokacijama u heap memoriji. Prilikom prelaska na sljedeći čvor procesor često mora ponovno dohvaćati podatke iz RAM-a, što uzrokuje tzv. cache miss i usporava izvođenje programa.
+
+Zbog toga, iako su nizovi i vezane liste iste vremenske složenosti O(N) za prolazak elemenata, u stvarnim uvjetima nizovi mogu biti višestruko brži.
+
+-Question 2: The Space Complexity Trap in Recursion
+
+U ovom slučaju program se ruši sa Segmentation Fault greškom zbog stack overflowa. Iako je prostorna složenost DFS algoritma O(H), problem nastaje zbog mjesta gdje se memorija zapravo koristi.
+Kod rekurzije se svaki novi poziv funkcije sprema na pozivni stog. Svaki poziv funkcije stvara novi stack frame, koji sadrži lokalne varijable, parametre funkcije i povratnu adresu. Kako se DFS poziva sve dublje kroz direktorij broj poziva može postati jako velik.
+
+Iako server ima desetke gigabajta slobodnog RAM-a, veličina stoga je uglavnom strogo ograničena od strane operacijskog sustava pa je zbog tog važno razlikovati heap i stack memoriju. Na Linux sustavima taj limit je često oko 8 MB po dretvi.
+Zbpg toga dolazi do stack overflowa ukoliko je dubina rekurzije prevelika nakon čega se prekida rad programa.
