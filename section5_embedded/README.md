@@ -24,16 +24,14 @@ Promjena stanja se prihvaća nakon 3 uzastopna i jednaka uzorka pa se tako izbje
 
 2. Assumptions & Trade-offs
 Assumptions:
-0 = pressed, 1 = released to je active-low logika 
-Funkcija se izvršava svakih 5 ms
-Nema hardware debounce mehanizma
+0 = pressed, 1 = released to je active-low logika, funkcija se izvršava svakih 5 ms, nema hardware debounce mehanizma
 
 Trade-offs:
 Korišten je state machine pristup umjesto delay-based debounce metode jer ne blokira izvođenje programa i omogućuje periodičko provjeravanje stanja tipke.
 
 3. Verification Steps
 Provjereni su sljedeći slučajevi:
-stabilan pritisak - BUTTON_PRESSED
-stabilno otpuštanje - BUTTON_RELEASED
-bounce sekvence (0-1-0-1) ne uzrokuju promjenu stanja
+stabilan pritisak - BUTTON_PRESSED,
+stabilno otpuštanje - BUTTON_RELEASED,
+bounce sekvence (0-1-0-1) ne uzrokuju promjenu stanja,
 dugo držanje tipke održava stabilno stanje
