@@ -46,13 +46,13 @@ begin
             error <= "0000";
             
         elsif rising_edge(clk) then
-            -- Resetiramo defaultne izlaze na poËetku svakog takta
+            -- Resetiramo defaultne izlaze na po√®etku svakog takta
             error <= "0000";
             change <= 0;
 
             case current_state is
                 when IDLE =>
-                    -- elsif da sprijeËimo viöe stvari od jednom istovremeno
+                    -- elsif da sprije√®imo vi≈°e stvari od jednom istovremeno
                     if coins /= prev_coins and coins /= "0000" then
                         if    coins = "0001" then coin_value := 1;
                         elsif coins = "0010" then coin_value := 2;
@@ -66,9 +66,9 @@ begin
                         end if;
 
                         if coin_value = -1 then
-                            error <= "0001"; -- Error: NevaûeÊa kovanica[cite: 1]
+                            error <= "0001"; -- Error: Neva≈æe√¶a kovanica
                         elsif (balance + coin_value) > 5000 then
-                            error <= "0010"; -- Error: Prijelaz preko 50 EUR limita[cite: 1]
+                            error <= "0010"; -- Error: Prijelaz preko 50 EUR limita
                         else
                             balance <= balance + coin_value;
                         end if;
@@ -76,16 +76,16 @@ begin
                     --Povrat kusura
                     elsif change_request = '1' and prev_change_request = '0' then
                         change <= balance; -- Izbaci novac
-                        balance <= 0;      -- Instanto resetiraj balance na nulu kako traûi PDF[cite: 1]
+                        balance <= 0;      -- Instanto resetiraj balance na nulu kako tra≈æi PDF
 
-                    --Obrada narudûbe
+                    --Obrada narud≈æbe
                     elsif product /= prev_product and product /= "00000" then
                         prod_idx := to_integer(unsigned(product));
                         
                         if prod_idx < 1 or prod_idx > 20 then
                             error <= "0011";
                         else
-                            -- RaËunanje cijene gdje je prvih 5 1.25 EUR, a ostali +37 centi
+                            -- Ra√®unanje cijene gdje je prvih 5 1.25 EUR, a ostali +37 centi
                             if prod_idx <= 5 then
                                 prod_price := 125; 
                             else
@@ -94,7 +94,7 @@ begin
 
                             if balance >= prod_price then
                                 balance <= balance - prod_price; 
-                                -- Zbog FSMa jedan takt ide viöe radi prijelaza
+                                -- Zbog FSMa jedan takt ide vi≈°e radi prijelaza
                                 timer <= CYCLES_5_SEC - 1;       
                                 current_state <= DISPATCH;       
                             end if;
@@ -108,20 +108,20 @@ begin
                         current_state <= IDLE; 
                     end if;
 
-                    --Ilegalne radnje u isporuci, ignoriramo i diûemo zastavice
+                    --Ilegalne radnje u isporuci, ignoriramo i di≈æemo zastavice
                     if coins /= prev_coins and coins /= "0000" then
                         error <= "0100"; -- Ubacivanje kovanice tijekom isporuke
                     end if;
                     if product /= prev_product and product /= "00000" then
-                        error <= "0101"; --Traûenje proizvoda tijekom isporuke
+                        error <= "0101"; --Tra≈æenje proizvoda tijekom isporuke
                     end if;
                     if change_request = '1' and prev_change_request = '0' then
-                        error <= "0110"; --Traûenje povrata tijekom isporuke
+                        error <= "0110"; --Tra≈æenje povrata tijekom isporuke
                     end if;
 
             end case;
 
-            -- Spremanje trenutnog stanja za edge detection u iduÊem ciklusu
+            -- Spremanje trenutnog stanja za edge detection u idu√¶em ciklusu
             prev_coins <= coins;
             prev_product <= product;
             prev_change_request <= change_request;
