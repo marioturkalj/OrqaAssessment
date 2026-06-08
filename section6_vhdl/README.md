@@ -13,10 +13,10 @@ Odabrana je jednostavna FSM arhitektura radi preglednosti i lakše sinteze, uz n
 
 3. Verification Steps
 Testbench pokriva sljedeće:
-normalan unos kovanica i kupnju proizvoda
-prekoračenje maksimalnog kredita
-neispravan unos kovanice
-neispravan odabir proizvoda
-povrat ostatka novca
-pokušaj kupnje, povratka kusura ili ubacivanje novca tijekom isporuke proizvoda
+normalan unos kovanica i kupnju proizvoda,
+prekoračenje maksimalnog kredita,
+neispravan unos kovanice,
+neispravan odabir proizvoda,
+povrat ostatka novca,
+pokušaj kupnje, povratka kusura ili ubacivanje novca tijekom isporuke proizvoda,
 provjeru trajanja isporuke od 5 sekundi
